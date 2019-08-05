@@ -4,9 +4,9 @@ Plugin to cache Mongoose MongoDB query results in Redis. Lean DB queries, at lea
 
 ## 30/5/2014 - A note about this project
 
-Sorry guys that I haven't been around to maintain this project! This project has not been actively maintained and I'm terribly sorry for that. 
+Sorry guys that I haven't been around to maintain this project! This project has not been actively maintained and I'm terribly sorry for that.
 
-I would love to have someone to help as active contributors to this project, if you're interested please do email me at conancat@gmail.com, and we'll work something out! Thank you so much guys!! 
+I would love to have someone to help as active contributors to this project, if you're interested please do email me at conancat@gmail.com, and we'll work something out! Thank you so much guys!!
 
 ## How to use
 First, the usual:
@@ -163,14 +163,14 @@ Cool for high-volume data reading!
        cache: true
      })
 
-OPTIONAL 
-Set cache to true if you need to enable caching for all collections. 
+OPTIONAL
+Set cache to true if you need to enable caching for all collections.
 
 ### redisCache: Boolean
 
     ExampleSchema.set('redisCache', true)
 
-OPTIONAL 
+OPTIONAL
 Call this function on whatever collection you want to cache. You don't have to use this on every collection,
 right? Pick and choose your collections wisely, you shall.
 
@@ -243,4 +243,3 @@ This gives us fair comparison between Redis caching and direct MongoDB queries.
 ## Contact
 
 Let's talk! I'm on [Twitter](https://twitter.com/conancat), [Reddit](http://www.reddit.com/user/conancat), or you can email me at conancat@gmail.com.
-

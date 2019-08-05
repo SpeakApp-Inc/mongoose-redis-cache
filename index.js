@@ -30,15 +30,19 @@ mongooseRedisCache = function(mongoose, options, callback) {
   port = options.port || "";
   pass = options.pass || "";
   redisOptions = options.options || {};
+  client = options.client;
   prefix = options.prefix || "cache";
-  mongoose.redisClient = client = redis.createClient(port, host, redisOptions);
-  if (pass.length > 0) {
-    client.auth(pass, function(err) {
-      if (callback) {
-        return callback(err);
-      }
-    });
+  if (!client) {
+    client = redis.createClient(port, host, redisOptions);
+    if (pass.length > 0) {
+      client.auth(pass, function(err) {
+        if (callback) {
+          return callback(err);
+        }
+      });
+    }
   }
+  mongoose.redisClient = client;
   mongoose.Query.prototype._exec = mongoose.Query.prototype.exec;
   mongoose.Query.prototype.exec = function(callback) {
     var cb, collectionName, expires, fields, hash, key, model, populate, query, schemaOptions, self;
@@ -57,7 +61,7 @@ mongooseRedisCache = function(mongoose, options, callback) {
       return mongoose.Query.prototype._exec.apply(self, arguments);
     }
     delete this._mongooseOptions.redisCache;
-    delete this._mongooseOptions.redixExpires;
+    delete this._mongooseOptions.redisExpires;
     hash = crypto.createHash('md5').update(JSON.stringify(query)).update(JSON.stringify(options)).update(JSON.stringify(fields)).update(JSON.stringify(populate)).digest('hex');
     key = [prefix, collectionName, hash].join(':');
     cb = function(err, result) {

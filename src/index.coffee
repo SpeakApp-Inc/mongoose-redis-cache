@@ -31,9 +31,13 @@ mongooseRedisCache = (mongoose, options, callback) ->
   port = options.port || ""
   pass = options.pass || ""
   redisOptions = options.options || {}
+  client = options.client
   prefix = options.prefix || "cache"
 
-  mongoose.redisClient = client = redis.createClient port, host, redisOptions
+  if !client
+    client = redis.createClient port, host, redisOptions
+
+  mongoose.redisClient = client
 
   if pass.length > 0
     client.auth pass, (err) ->
@@ -70,7 +74,7 @@ mongooseRedisCache = (mongoose, options, callback) ->
       return mongoose.Query::_exec.apply self, arguments
 
     delete @_mongooseOptions.redisCache
-    delete @_mongooseOptions.redixExpires
+    delete @_mongooseOptions.redisExpires
 
     hash = crypto.createHash('md5')
       .update(JSON.stringify query)

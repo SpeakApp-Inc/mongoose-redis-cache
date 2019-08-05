@@ -1,9 +1,10 @@
 {
   "name": "mongoose-redis-cache",
-  "version": "0.0.3+patch.1",
+  "version": "1.0.0",
   "description": "Plugin to cache Mongoose MongoDB query results in Redis",
   "main": "index.js",
   "scripts": {
+    "compile": "decaffeinate src/index.coffee && mv -vf src/index.js index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "BSD",
@@ -11,17 +12,18 @@
     "test": "test"
   },
   "dependencies": {
-    "redis": "~0.10.0",
+    "redis": "^2.8.0",
     "underscore": "~1.5.2"
   },
   "devDependencies": {
-    "mocha": "~1.17.0",
     "async": "~0.2.9",
+    "decaffeinate": "^6.0.1",
+    "mocha": "~1.17.0",
     "mongoose": "~3.8.4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conancat/mongoose-redis-cache.git"
+    "url": "https://github.com/SpeakApp-Inc/mongoose-redis-cache.git"
   },
   "keywords": [
     "mongodb",
@@ -29,5 +31,11 @@
     "redis",
     "cache"
   ],
-  "author": "Grey Ang"
+  "author": "Grey Ang",
+  "contributors": [
+    {
+      "name": "Eduardo Daniel Cuomo",
+      "url": "reduardo7@gmail.com"
+    }
+  ]
 }
